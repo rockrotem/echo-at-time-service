@@ -27,5 +27,19 @@ describe('echo-in-time route tests', () => {
       expect(response.status, 'HTTP status').to.equal(200);
       expect(body.ok, 'body.ok').to.equal(true);
     });
+
+    it('should save messages with valid payload and future timestemp', async () => {
+      const message = 'test message';
+      const runAt = new Date();
+      runAt.setSeconds(runAt.getSeconds() + 60);
+      const messageModel = new MessageModel(message, runAt.getTime());
+      const response = await chai.request(app).post('/api/v1/save-message')
+        .set('content-type', 'application/json')
+        .send(messageModel);
+
+      const { body } = response;
+      expect(response.status, 'HTTP status').to.equal(200);
+      expect(body.ok, 'body.ok').to.equal(true);
+    });
   });
 });

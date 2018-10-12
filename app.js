@@ -3,6 +3,7 @@ const express = require('express');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const RedisRepository = require('./lib/repositories/redis-repository');
+const MessageScheduler = require('./lib/message-scheduler');
 
 const echoInTimeRouter = require('./lib/routes/echo-in-time-route');
 
@@ -32,4 +33,6 @@ app.use((err, req, res, next) => {
 });
 
 RedisRepository.initClient();
+MessageScheduler.run();
+
 module.exports = app;
