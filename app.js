@@ -22,6 +22,7 @@ app.use((req, res, next) => {
 });
 
 // error handler
+// eslint-disable-next-line no-unused-vars
 app.use((err, req, res, next) => {
   // set locals, only providing error in development
   res.locals.message = err.message;
@@ -29,7 +30,7 @@ app.use((err, req, res, next) => {
 
   // render the error page
   res.status(err.status || 500);
-  console.error('Error in app', err)
+  console.error('Error in app', err);
 });
 
 RedisRepository.initClient();
