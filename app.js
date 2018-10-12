@@ -2,7 +2,7 @@ const createError = require('http-errors');
 const express = require('express');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
-const { RedisRepository } = require('./lib/repositories/redis-repository');
+const RedisRepository = require('./lib/repositories/redis-repository');
 
 const echoInTimeRouter = require('./lib/routes/echo-in-time-route');
 
@@ -28,7 +28,7 @@ app.use((err, req, res, next) => {
 
   // render the error page
   res.status(err.status || 500);
-  res.render('error');
+  console.error('Error in app', err)
 });
 
 RedisRepository.initClient();

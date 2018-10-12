@@ -15,6 +15,7 @@ const options = {
       custom: {
         db: async () => {
           await sleep(2000);
+          return true;
         },
       },
     },
@@ -25,11 +26,11 @@ const options = {
 const randomEnvName = dct.dockerComposeTool(before, after, pathOfDockerCompose, options);
 
 before(async () => {
-  const hosts = await getAddressForService(randomEnvName, pathOfDockerCompose, 'db', 6379);
+  const hosts = await getAddressForService(randomEnvName, pathOfDockerCompose, 'redis', 6379);
   const hostsArray = hosts.split(':');
   /* eslint prefer-destructuring: ["error", {AssignmentExpression: {array: false}}] */
   process.env.REDIS_HOSTS = hosts;
-  process.env.REDIS_PORT = hostsArray[0];
+  process.env.REDIS_PORT = hostsArray[1];
 
   console.info('Redis running');
 });
