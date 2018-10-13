@@ -1,4 +1,3 @@
-// require('../../e2e-tools/setup');
 const chai = require('chai');
 const chaiHttp = require('chai-http');
 const Chance = require('chance');
